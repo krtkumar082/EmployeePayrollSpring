@@ -3,9 +3,13 @@ package com.employee.employeepayrollapp.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.employee.employeepayrollapp.dto.EmployeePayrollDTO;
+import com.employee.employeepayrollapp.exceptions.EmployeePayrollException;
 import com.employee.employeepayrollapp.model.EmployeePayrollData;
 
+@Service
 public class EmployeePayrollService implements IEmployeePayrollService{
 	private List<EmployeePayrollData> employeePayrollList = new ArrayList<>();
 
@@ -16,7 +20,8 @@ public class EmployeePayrollService implements IEmployeePayrollService{
 
 	@Override
 	public EmployeePayrollData getEmployeePayrollDataById(int empId) {
-		return employeePayrollList.get(empId - 1);
+		return employeePayrollList.stream().filter(obj->obj.getEmpId()==empId)
+				                   .findFirst().orElseThrow(()-> new EmployeePayrollException("Employee Not Found"));
 	}
 
 	@Override
