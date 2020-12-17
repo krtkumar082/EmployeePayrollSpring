@@ -1,11 +1,23 @@
 package com.employee.employeepayrollapp.model;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import com.employee.employeepayrollapp.dto.EmployeePayrollDTO;
 
-public class EmployeePayrollData {
+import lombok.Data;
+
+
+public @Data class EmployeePayrollData {
 	private int empId;
 	private String name;
 	private long salary;
+	
+	public String gender;
+	public LocalDate startDate;
+	public String note;
+	public String profilePic;
+	public List<String> department;
 
 	public EmployeePayrollData() {
 
@@ -13,36 +25,18 @@ public class EmployeePayrollData {
 
 	public EmployeePayrollData(int empId, EmployeePayrollDTO empPayrollDTO) {
 		this.empId=empId;
+		this.updateEmployeePayrollData(empPayrollDTO);
+	}
+   
+	public void updateEmployeePayrollData(EmployeePayrollDTO empPayrollDTO) {
 		this.name=empPayrollDTO.name;
 		this.salary=empPayrollDTO.salary;
+		this.gender=empPayrollDTO.gender;
+		this.startDate=empPayrollDTO.startDate;
+		this.note=empPayrollDTO.note;
+		this.profilePic=empPayrollDTO.profilePic;
+		this.department=empPayrollDTO.department;
+		
 	}
-
-	@Override
-	public String toString() {
-		return "EmployeePayrollDTO [empId=" + empId + ", name=" + name + ", salary=" + salary + "]";
-	}
-
-	public int getEmpId() {
-		return empId;
-	}
-
-	public void setEmpId(int empId) {
-		this.empId = empId;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public long getSalary() {
-		return salary;
-	}
-
-	public void setSalary(long salary) {
-		this.salary = salary;
-	}
+	
 }
