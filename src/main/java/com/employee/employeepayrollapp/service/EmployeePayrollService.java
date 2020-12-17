@@ -1,6 +1,6 @@
 package com.employee.employeepayrollapp.service;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +33,11 @@ public class EmployeePayrollService implements IEmployeePayrollService{
 	}
 
 	@Override
+	public List<EmployeePayrollData> getEmployeePayrollDataByDepartment(String department) {
+	    return 	employeePayrollRepository.findEmployeesByDepatment(department);
+	}
+	
+	@Override
 	public EmployeePayrollData createEmployeePayrollData(EmployeePayrollDTO empPayrollDTO) {
 		EmployeePayrollData empData = null;
 		empData = new EmployeePayrollData(empPayrollDTO);
@@ -53,4 +58,6 @@ public class EmployeePayrollService implements IEmployeePayrollService{
 	     employeePayrollRepository.delete(empData);
 
 	}
+
+	
 }
